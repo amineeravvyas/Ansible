@@ -1,0 +1,15 @@
+---
+- name: Install nginx
+  apt:
+    name: nginx
+    state: latest
+
+- name: Start Service
+  apt:
+    name: nginx
+    state: present
+  register: nginx_install_output #capture output in this variable
+
+- name: Display Nginx installation output #display in output logs
+  debug:
+    var: nginx_install_output
