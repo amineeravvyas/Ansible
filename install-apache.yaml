@@ -2,7 +2,7 @@
 - name: Install and configure nginx for static website hosting
   hosts: all
   become: true #change it
-#  become_user: root
+
 
   tasks:
     - name: Install apache
