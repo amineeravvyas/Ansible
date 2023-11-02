@@ -1,0 +1,8 @@
+---
+- name: Install and configure nginx for static website hosting
+  hosts: my_servers_1   #Enter group name, servername/ip address. use "all" to execute against all hosts in inventory list
+  become: true #This is to say that the user should do sudo when executing task
+  
+  roles:
+    - install-nginx
+    - send-email

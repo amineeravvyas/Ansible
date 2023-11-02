@@ -1,0 +1,12 @@
+---
+- name: Notify via email upon completion
+  become: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "amineeravvyas@gmail.com"
+    password: "dhcncqqhnanugvcf"
+    to: "amineeravvyas@yahoo.com"
+    subject: "Nginx installation completed"
+    body: "The installation of Nginx on {{ inventory_hostname }} is completed." #inventory_hostname = entry made in inventiry file. i.e. ip 10.0.0.5 in this case
+  delegate_to: localhost

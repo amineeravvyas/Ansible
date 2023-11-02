@@ -1,7 +1,7 @@
 ---
 - name: Install and configure nginx for static website hosting
-  hosts: all
-  become: true
+  hosts: my_servers_1   #Enter group name, servername/ip address. use "all" to execute against all hosts in inventory list
+  become: true #This is to say that the user should do sudo when executing task
 
   tasks:
     - name: Install nginx
@@ -13,3 +13,20 @@
       apt:
         name: nginx
         state: present
+      register: nginx_install_output #capture output in this variable
+
+    - name: Display Nginx installation output #display in output logs
+      debug:
+        var: nginx_install_output
+
+    - name: Notify via email upon completion
+      become: false
+      mail:
+        host: smtp.gmail.com
+        port: 587
+        username: "amineeravvyas@gmail.com"
+        password: "dhcncqqhnanugvcf"
+        to: "amineeravvyas@yahoo.com"
+        subject: "Nginx installation completed"
+        body: "The installation of Nginx on {{ inventory_hostname }} is completed." #inventory_hostname = entry made in inventiry file. i.e. ip 10.0.0.5 in this case
+      delegate_to: localhost

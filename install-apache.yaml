@@ -1,7 +1,8 @@
 ---
 - name: Install and configure nginx for static website hosting
   hosts: all
-  become: false
+  become: true #change it
+
 
   tasks:
     - name: Install apache
